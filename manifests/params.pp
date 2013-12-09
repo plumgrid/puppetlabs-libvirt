@@ -42,7 +42,7 @@ class libvirt::params {
       $libvirt_version = "installed"
       $libvirt_service = "libvirt-bin"
       $libvirt_user = "libvirt"
-      $libvirt_group = "libvirt"
+      $libvirt_group = "libvirtd"
       $libvirt_config_dir = "/etc/libvirt"
       $libvirtd_config_file = "${libvirt_config_dir}/libvirtd.conf"
       $qemu_config_file = "${libvirt_config_dir}/qemu.conf"

@@ -74,19 +74,6 @@ class libvirt (
 
   ) inherits libvirt::params {
 
-  ##############################
-  # Base packages and service  #
-  ##############################
-  package { $package:
-    ensure => $version
-  }
-  service { $service:
-    ensure => running,
-    enable => true,
-    hasstatus => true,
-    hasrestart => true,
-  }
-
   ########################
   # libvirtd.conf Config #
   ########################
