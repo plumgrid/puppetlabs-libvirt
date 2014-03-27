@@ -74,6 +74,14 @@ class libvirt (
 
   ) inherits libvirt::params {
 
+  if $virtinst {
+    package { $virtinst_package: ensure => installed }
+  }
+
+  if $radvd {
+    package { $radvd_package: ensure => installed }
+  }
+
   ########################
   # libvirtd.conf Config #
   ########################
@@ -104,9 +112,11 @@ class libvirt (
   create_resources("libvirt::libvirtd_config", $libvirtd_config)
 
   # Some minor defaults. These may need to differ per OS in the future.
-  libvirt::libvirtd_config { ["auth_unix_ro", "auth_unix_rw"]: value => "none" }
-  libvirt::libvirtd_config { "unix_sock_group": value => $group }
-  libvirt::libvirtd_config { "unix_sock_rw_perms": value => "0770" }
+  if $::osfamily == 'Debian' {
+    libvirt::libvirtd_config { ["auth_unix_ro", "auth_unix_rw"]: value => "none" }
+    libvirt::libvirtd_config { "unix_sock_group": value => $group }
+    libvirt::libvirtd_config { "unix_sock_rw_perms": value => "0770" }
+  }
 
   ####################
   # qemu.conf Config #
