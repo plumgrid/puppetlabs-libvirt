@@ -137,6 +137,7 @@ class libvirt (
     command => "/bin/cat ${config_dir}/qemu.d/* > ${qemu_config_file}",
     refreshonly => true,
     require => [ Package[$package], File["${config_dir}/qemu.d"] ],
+    notify => Service[$service],
   }
   file { $qemu_config_file:
     owner => root,
