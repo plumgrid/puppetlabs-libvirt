@@ -82,16 +82,6 @@ class libvirt (
     package { $radvd_package: ensure => installed }
   }
 
-  #####################
-  # Users and groups. #
-  #####################
-
-  group { $group:
-    ensure  => present,
-    system  => true,
-    require => Package[$package],
-  }
-
   ########################
   # libvirtd.conf Config #
   ########################
@@ -162,4 +152,3 @@ class libvirt (
   create_resources("libvirt::qemu_config", $qemu_config)
 
 }
-
